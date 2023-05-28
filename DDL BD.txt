@@ -1,0 +1,66 @@
+CREATE TABLE `clients` (
+  `id_client` int NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(50) COLLATE utf8mb3_spanish_ci NOT NULL,
+  `last_name` varchar(50) COLLATE utf8mb3_spanish_ci NOT NULL,
+  `document` varchar(50) COLLATE utf8mb3_spanish_ci NOT NULL,
+  `direction` varchar(100) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `state` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id_client`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+
+CREATE TABLE `employees` (
+  `id_employee` int NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(50) COLLATE utf8mb3_spanish_ci NOT NULL,
+  `last_name` varchar(50) COLLATE utf8mb3_spanish_ci NOT NULL,
+  `document` varchar(50) COLLATE utf8mb3_spanish_ci NOT NULL,
+  `phone` varchar(20) COLLATE utf8mb3_spanish_ci NOT NULL,
+  `state` tinyint(1) NOT NULL DEFAULT '0',
+  `rol` varchar(45) COLLATE utf8mb3_spanish_ci NOT NULL,
+  `password` longtext COLLATE utf8mb3_spanish_ci NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id_employee`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+
+CREATE TABLE `products` (
+  `id_product` int NOT NULL AUTO_INCREMENT,
+  `code` varchar(50) COLLATE utf8mb3_spanish_ci NOT NULL,
+  `name` varchar(50) COLLATE utf8mb3_spanish_ci NOT NULL,
+  `description` varchar(50) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `stock` int NOT NULL,
+  `state` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id_product`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+
+CREATE TABLE `store_bootsfaces`.`sales` (
+  `id_sale` INT NOT NULL AUTO_INCREMENT,
+  `id_client` INT NOT NULL,
+  `id_employee` INT NOT NULL,
+  `date_sale` DATE NOT NULL,
+  `subtotal` DECIMAL(10,1) NOT NULL,
+  `tax` DECIMAL(10,1) NOT NULL,
+  `total` DECIMAL(10,1) NOT NULL,
+  `created_at` DATETIME NOT NULL,
+  `updated_at` DATETIME NULL,
+  `deleted_at` DATETIME NULL,
+  PRIMARY KEY (`id_sale`),
+  INDEX `id_client_sales_fk_idx` (`id_client` ASC) VISIBLE,
+  INDEX `id_employee_sales_fk_idx` (`id_employee` ASC) VISIBLE,
+  CONSTRAINT `id_client_sales_fk`
+    FOREIGN KEY (`id_client`)
+    REFERENCES `store_bootsfaces`.`clients` (`id_client`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `id_employee_sales_fk`
+    FOREIGN KEY (`id_employee`)
+    REFERENCES `store_bootsfaces`.`employees` (`id_employee`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
