@@ -1,2 +1,7 @@
+com\store\ec\entity\JakartaRestConfiguration.class
+com\store\ec\entity\Sales.class
+com\store\ec\entity\Employees.class
+com\store\ec\entity\Clients.class
+com\store\ec\entity\SalesDetails.class
+com\store\ec\entity\Products.class
 com\store\ec\store\resources\JakartaEE10Resource.class
-com\store\ec\store\JakartaRestConfiguration.class
